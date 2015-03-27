@@ -1,0 +1,51 @@
+<html>  
+<head><title>atyu30 page test</title>  
+<style type="text/css">  
+table{border:3 solid black; border-collapse:collapse}  
+table th, table td{border:2 solid black}  
+</style>  
+  
+</head>  
+<body>  
+<h3>Archive:</h3>  
+{% if msg_list %}  
+    <table id = "msgs">  
+        <tr>  
+            <th>Title</th>  
+            <th>Content</th>  
+            <th>Author</th>  
+            <th>Ip</th>  
+            <th>Time</th>  
+            <th>Click</th>  
+        </tr>  
+    {%for msg in msg_list %}  
+        <tr>  
+            <td>{{msg.title}}</td>  
+            <td>{{msg.content}}</td>  
+            <td>{{msg.user}}</td>  
+            <td>{{msg.ip}}</td>  
+            <td>{{msg.datetime}}</td>  
+            <td>{{msg.click_count}}</td>  
+        </tr>  
+    {% endfor%}  
+    </table>  
+    {% if is_paginated %}  
+    <div class="pagination">  
+        <span class="page-links">  
+            {% if page_obj.has_previous %}  
+                <a href="/blog?page={{ page_obj.previous_page_number }}">up</a>  
+            {% endif %}  
+            {% if page_obj.has_next %}  
+                <a href="/blog?page={{ page_obj.next_page_number }}">down</a>  
+            {% endif %}  
+            <span class="page-current">  
+                第{{ page_obj.number }}页 ，工{{ page_obj.paginator.num_pages }}页。  
+            </span>  
+        </span>  
+    </div>  
+    {%endif%}  
+{% else %}  
+<p>No msgs !!!</p>  
+{% endif %}  
+</body>  
+</html>
